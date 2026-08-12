@@ -1,14 +1,17 @@
-// Last updated: 8/12/2026, 10:45:49 PM
+// Last updated: 8/12/2026, 11:02:15 PM
 1class Solution {
 2public:
-3    bool containsDuplicate(vector<int>& nums) {
-4        int n=nums.size();
-5        unordered_map<int,int>mp;
-6        for(int i=0;i<n;i++)
-7        {
-8            mp[nums[i]]++;
-9            if(mp[nums[i]]>1)return true;
-10        }
-11        return false;
-12    }
-13};
+3    int searchInsert(vector<int>& nums, int target) {
+4       int n=nums.size();
+5       int low=0;
+6       int high=n-1;
+7       while(low<=high)
+8       {
+9         int mid=low+(high-low)/2;
+10         if(nums[mid]==target)return mid;
+11         if(nums[mid]<target)low=mid+1;
+12         else high=mid-1;
+13       }
+14       return low;
+15    }
+16};
