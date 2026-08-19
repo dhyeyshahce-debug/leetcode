@@ -1,34 +1,32 @@
-// Last updated: 8/19/2026, 7:38:53 PM
+// Last updated: 8/19/2026, 7:44:57 PM
 1class Solution {
 2public:
-3    int minSpeedOnTime(vector<int>& dist, double hour) {
-4        int n=dist.size();
+3    int smallestDivisor(vector<int>& nums, int threshold) {
+4        int n=nums.size();
 5        int low=1;
-6        int high=(int)1e7;
-7        int ans=-1;
-8
-9        while(low<=high)
-10        {
-11            int mid=low+(high-low)/2;
-12            double time=0;
-13            //we don't need to calculate last value
-14            for(int i=0;i<n-1;i++)
-15            {
-16               time += ceil((double)dist[i] / mid);
-17            }
-18            //last value is not calculated 
-19            time+=(double)dist.back()/mid;
-20            
-21            if(time<=hour)
-22            {
-23                ans=mid;
-24                high=mid-1;
-25            }
-26            else 
-27            {
-28                low=mid+1;
-29            }
-30        }
-31        return ans;
-32    }
-33};
+6        int high=0;
+7        int ans=0;
+8        for(int i=0;i<n;i++)
+9        {
+10            high=max(high,nums[i]);
+11        }
+12        while(low<=high)
+13        {
+14            int mid=low+(high-low)/2;
+15            int sum=0;
+16            for(int i=0;i<n;i++)
+17            {
+18                sum+=ceil((double)nums[i]/mid);
+19            }
+20            if(sum<=threshold)
+21            {
+22                ans=mid;
+23                high=mid-1;
+24            }
+25            else{
+26                low=mid+1;
+27            }
+28        }
+29        return ans;
+30    }
+31};
