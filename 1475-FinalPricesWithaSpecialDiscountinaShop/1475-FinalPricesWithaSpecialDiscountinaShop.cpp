@@ -1,26 +1,25 @@
-// Last updated: 9/20/2026, 6:40:26 PM
+// Last updated: 9/20/2026, 7:03:56 PM
 1class Solution {
 2public:
-3    vector<int> finalPrices(vector<int>& prices) {
-4        int n=prices.size();
-5        vector<int>ans(n,0);
-6        stack<int>st;
-7        for(int i=n-1;i>=0;i--)
-8        {
-9            while(!st.empty() && st.top()>prices[i])
-10            {
-11                st.pop();
-12            }
-13            if(!st.empty())
-14            {
-15                ans[i]=prices[i]-st.top();
-16            } 
-17            else 
-18            {
-19                ans[i]=prices[i];
-20            }
-21            st.push(prices[i]);
-22        }
-23        return ans;
-24    }
-25};
+3    string removeStars(string s) {
+4        stack<char>st;
+5        for(int i=0;i<s.size();i++)
+6        {
+7           if(s[i]=='*')
+8           {
+9            st.pop();
+10           }
+11           else{
+12           st.push(s[i]);
+13           }  
+14        }
+15        string ans="";
+16        while(!st.empty())
+17        {
+18            ans+=st.top();
+19            st.pop();
+20        }
+21        reverse(ans.begin(),ans.end());
+22        return ans;
+23    }
+24};
